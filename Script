@@ -1,0 +1,39 @@
+
+local ReplicatedStorage = game:getService("ReplicatedStorage")
+local children = workspace:GetChildren()
+-- Create a nickname for MyBlock to simplify code
+local Block = game.workspace.MyBlock
+BlockCount = 1
+
+-- Function defines how to spawn a block
+local function SpawnBlock()	 
+	-- Create a new clone of MyBlock
+	local NewBlock = Block:Clone()
+	-- Output to check if the function works
+	print("New Block Spawned")
+	-- Add the new block to the workspace
+	NewBlock.Parent = game.Workspace
+	-- Set position of new block
+	NewBlock.Position = Vector3.new(0.5, 3, 41)
+	-- Replace MyBlock with the new block
+	Block = NewBlock
+end
+
+-- Function to check tool to object collision
+script.Parent.Union.Touched:connect(function(partAttacked)
+	local object = partAttacked
+
+	-- If the object hit is a block...
+	if object == Block then
+		-- Output to check if the function works
+		print("\nHit Block")
+		-- Destroy Block and then output to console
+		object:Destroy()
+ 		print("Destroyed Block")
+		wait(2)
+		-- Run the SpawnBlock function above
+		SpawnBlock()
+	end
+end)
+ 
+  

@@ -1,0 +1,35 @@
+
+-- Setup for animations to be loaded and played from Client (Player)
+-- Must be loaded on Client, only NPCs can be loaded and played from Server
+local Players = game:GetService("Players")
+local character = Players.LocalPlayer.Character
+
+if not character or not character.Parent then
+	character = Players.LocalPlayer.CharacterAdded:Wait()
+end
+
+local humanoid = character:WaitForChild("Humanoid")
+
+-- Create ATTACK animation, assign animation id, then load onto humanoid
+local AttackAnim = Instance.new("Animation")
+AttackAnim.AnimationId = "rbxassetid://5261739685" -- ***USE YOUR ID INSTEAD!***
+local AttackAnimTrack = humanoid:LoadAnimation(AttackAnim)
+
+-- Create variable for whether player can attack
+local PCanAttack = true 
+
+-- When player clicks while holding the Block Breaker
+script.Parent.Activated:connect(function()
+	if PCanAttack == true then
+		PCanAttack = false
+		print("\nAttack animation playing!")
+		-- Play Attack Animation
+		AttackAnimTrack:Play()
+		wait(1)
+		-- Stop Attack Animation
+		AttackAnimTrack:Stop()
+		PCanAttack = true
+	end
+end)
+ 
+  

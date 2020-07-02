@@ -18,7 +18,7 @@ local AttackAnimTrack = humanoid:LoadAnimation(AttackAnim)
 -- Create variable for whether player can attack
 local PCanAttack = true 
 
--- When player clicks while holding the Block Breaker
+-- When player clicks while holding the block breaker
 script.Parent.Activated:connect(function()
 	if PCanAttack == true then
 		PCanAttack = false
